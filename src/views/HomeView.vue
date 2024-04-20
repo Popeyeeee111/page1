@@ -12,7 +12,7 @@
             @select="handleSelect"
         >
           <el-menu-item index="1" @click.native="$router.push('/')">首页</el-menu-item>
-          <el-menu-item index="2" @click.native="$router.push('/password')">学者</el-menu-item>
+          <el-menu-item index="2" @click.native="$router.push('/123.pdf')">学者</el-menu-item>
           <el-menu-item index="3" @click.native="$router.push('/password')">成果</el-menu-item>
         </el-menu>
       </el-col>
@@ -33,15 +33,30 @@
       </el-col>
     </el-row>
     <el-container class="background-image-container">
-      <div style="margin: 10px; backdrop-filter: blur(2px); width: 350px; height: 30px; display: flex; justify-content:center">
-        <el-icon style="margin: 5px">
-          <search />
-        </el-icon>
-        <el-input
-            v-model="input1"
-            style="width: 240px"
-            placeholder="请输入内容"
-        />
+      <div style="margin: 10px; backdrop-filter: blur(2px); width: 600px; height: 80px; display: flex; justify-content:center">
+        <div style="display: flex; justify-content: center; align-items: center;">
+          <el-select
+              v-model="value"
+              placeholder="请选择"
+              size="large"
+              style="width: 130px"
+          >
+            <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+            />
+          </el-select>
+          <el-input
+              v-model="input1"
+              style="width: 240px; height: 40px"
+              placeholder="请输入内容"
+          />
+          <el-button type="primary" style="height: 40px"><el-icon style="margin: 5px">
+            <search />
+          </el-icon></el-button>
+        </div>
       </div>
     </el-container>
     <el-row :gutter="20" style="margin-top: 20px">
@@ -107,18 +122,30 @@
   </div>
   <el-dialog
       v-model="registerVisible"
-      title="Tips"
+      title="登录|注册"
       width="500"
       draggable
       overflow
   >
-    <span>It's a overflow draggable Dialog</span>
+    <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+      <el-tab-pane label="密码登录" name="first">
+        <el-input v-model="account" style="width: 240px" placeholder="邮箱账号" />
+        <el-input v-model="password" style="width: 240px; margin-top: 5px" placeholder="密码" />
+      </el-tab-pane>
+      <el-tab-pane label="验证码登录" name="second">
+        <el-input v-model="phone" style="width: 240px" placeholder="手机号码" />
+        <el-input v-model="code" style="width: 240px; margin-top: 5px" placeholder="验证码" />
+      </el-tab-pane>
+    </el-tabs>
+    <el-row style="display: flex; justify-content: center; align-items: center;">
+      <span style="color: dodgerblue; cursor: pointer;" @click="$router.push('/register')"> 忘记密码？</span>
+    </el-row>
+    <el-row style="display: flex; justify-content: center; align-items: center;">
+      <el-button type="primary" @click="registerVisible = false">登录</el-button>
+    </el-row>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="registerVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="registerVisible = false">
-          Confirm
-        </el-button>
+        <span style="color: dodgerblue; cursor: pointer" @click="$router.push('/register')"> 注册新账号</span>
       </div>
     </template>
   </el-dialog>
@@ -144,6 +171,34 @@ export default {
       duration: 1000,
     })
     source1.value = 1200
+    const value = ref('')
+    const options = [
+      {
+        value: 'Option1',
+        label: 'Option1',
+      },
+      {
+        value: 'Option2',
+        label: 'Option2',
+      },
+      {
+        value: 'Option3',
+        label: 'Option3',
+      },
+      {
+        value: 'Option4',
+        label: 'Option4',
+      },
+      {
+        value: 'Option5',
+        label: 'Option5',
+      },
+    ]
+    const activeName = ref('first')
+    const account =ref('')
+    const password =ref('')
+    const phone =ref('')
+    const code =ref('')
     function handelregisterVisible() {
       registerVisible.value = true
     }
@@ -153,7 +208,14 @@ export default {
       registerVisible,
       progress,
       analyze,
-      handelregisterVisible
+      handelregisterVisible,
+      value,
+      options,
+      activeName,
+      account,
+      password,
+      phone,
+      code
     }
   },
 }

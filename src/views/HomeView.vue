@@ -2,7 +2,7 @@
   <div>
     <el-row>
       <el-col :span="8">
-        <img src="../assets/logo1.jpg" alt="图片描述" style="width: 200px; height: 50px">
+        <img src="../assets/logo1.jpg" alt="图标" style="width: 200px; height: 50px">
       </el-col>
       <el-col :span="8">
         <el-menu
@@ -11,7 +11,7 @@
             mode="horizontal"
             @select="handleSelect"
         >
-          <el-menu-item index="1" @click.native="$router.push('/password')">首页</el-menu-item>
+          <el-menu-item index="1" @click.native="$router.push('/')">首页</el-menu-item>
           <el-menu-item index="2" @click.native="$router.push('/password')">学者</el-menu-item>
           <el-menu-item index="3" @click.native="$router.push('/password')">成果</el-menu-item>
         </el-menu>
@@ -23,7 +23,7 @@
           </el-col>
 
           <el-col :span="8">
-            <el-button plain>个人主页</el-button>
+            <el-button plain @click.native="$router.push('/personal')">个人主页</el-button>
           </el-col>
 
           <el-col :span="8">
@@ -33,10 +33,20 @@
       </el-col>
     </el-row>
     <el-container class="background-image-container">
+      <div style="margin: 10px; backdrop-filter: blur(2px); width: 350px; height: 30px; display: flex; justify-content:center">
+        <el-icon style="margin: 5px">
+          <search />
+        </el-icon>
+        <el-input
+            v-model="input1"
+            style="width: 240px"
+            placeholder="请输入内容"
+        />
+      </div>
     </el-container>
     <el-row :gutter="20" style="margin-top: 20px">
       <el-col :span="12">
-        <el-statistic title="成果" :value="progess" />
+        <el-statistic title="成果" :value="progress" />
       </el-col>
       <el-col :span="12">
         <el-statistic title="研究" :value="analyze" />
@@ -49,7 +59,7 @@
           <p style="margin-left: auto; margin-right: 10px; cursor: pointer; font-weight: bold; color: white" @click="">MORE</p>
         </el-header>
         <el-row :gutter="20" style="margin: 15px">
-          <el-col :span="4">
+          <el-col :span="6">
             <el-card>
               <el-avatar
                   src="https://th.bing.com/th/id/OIP.eGxrXl3JBPvZ-9UeBRx0cgHaHa?rs=1&pid=ImgDetMain" style="width: 100px; height: 100px"
@@ -58,7 +68,7 @@
               <p></p>
             </el-card>
           </el-col>
-          <el-col :span="4">
+          <el-col :span="6">
             <el-card>
               <el-avatar
                   src="https://th.bing.com/th/id/OIP.eGxrXl3JBPvZ-9UeBRx0cgHaHa?rs=1&pid=ImgDetMain" style="width: 100px; height: 100px"
@@ -67,7 +77,7 @@
               <p></p>
             </el-card>
           </el-col>
-          <el-col :span="4">
+          <el-col :span="6">
             <el-card>
               <el-avatar
                   src="https://th.bing.com/th/id/OIP.eGxrXl3JBPvZ-9UeBRx0cgHaHa?rs=1&pid=ImgDetMain" style="width: 100px; height: 100px"
@@ -76,25 +86,7 @@
               <p></p>
             </el-card>
           </el-col>
-          <el-col :span="4">
-            <el-card>
-              <el-avatar
-                  src="https://th.bing.com/th/id/OIP.eGxrXl3JBPvZ-9UeBRx0cgHaHa?rs=1&pid=ImgDetMain" style="width: 100px; height: 100px"
-              />
-              <p style="font-weight: bold">张三</p>
-              <p></p>
-            </el-card>
-          </el-col>
-          <el-col :span="4">
-            <el-card>
-              <el-avatar
-                  src="https://th.bing.com/th/id/OIP.eGxrXl3JBPvZ-9UeBRx0cgHaHa?rs=1&pid=ImgDetMain" style="width: 100px; height: 100px"
-              />
-              <p style="font-weight: bold">张三</p>
-              <p></p>
-            </el-card>
-          </el-col>
-          <el-col :span="4">
+          <el-col :span="6">
             <el-card>
               <el-avatar
                   src="https://th.bing.com/th/id/OIP.eGxrXl3JBPvZ-9UeBRx0cgHaHa?rs=1&pid=ImgDetMain" style="width: 100px; height: 100px"
@@ -141,14 +133,15 @@ export default {
   setup() {
     const activeIndex = ref('1')
     const registerVisible = ref(false)
+    const input1 = ref('')
     const source = ref(0)
     const source1 = ref(0)
-    const progess = useTransition(source, {
-      duration: 1500,
+    const progress = useTransition(source, {
+      duration: 1000,
     })
     source.value = 1200
     const analyze = useTransition(source1, {
-      duration: 1500,
+      duration: 1000,
     })
     source1.value = 1200
     function handelregisterVisible() {
@@ -156,8 +149,9 @@ export default {
     }
     return{
       activeIndex,
+      input1,
       registerVisible,
-      progess,
+      progress,
       analyze,
       handelregisterVisible
     }

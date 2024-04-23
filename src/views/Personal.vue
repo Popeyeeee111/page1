@@ -14,7 +14,7 @@
     <el-avatar style="height: 120px;width:120px;margin-top: 10px"
                :src="require('@/assets/Teacher.png')"
     />
-    <p style="font-size: 20px;font-weight: bold">许东升</p>
+    <p style="font-size: 20px;font-weight: bold">张三</p>
   </div>
 
   <div>
@@ -43,7 +43,8 @@
           <p style="font-weight: bold;font-size: 30px;display: flex">个人简介</p>
           <hr style="margin-top: -20px">
           <p style="display: flex;flex-wrap: wrap;">
-            许东升，教授，博士生导师、同济大学博士后合作导师、美国Nebraska大学医学中心兼职教授，上海中医药大学康复研究所副所长、上海市医师协会康复医师分会副会长、上海市康复医学会脑功能检测与调控康复专业委员会副主任委员、上海市康复医学会重症康复专业委员会副主任委员、中国研究型医院学会神经再生与修复专业委员会神经调控与康复研究学组组长.上海市医学会物理医学与康复学专业分会神经康复学组组长。</p>
+            长期致力于磁性体表面和界面性质理论，表面吸附和表面电子性质理论， 晶体光学性质的理论计算研究， 和计算凝聚态物理理论方法的发展。在磁性和表面物理研究中作出了突出贡献，在国内获得过国家和院级奖励三次，在国际上有广泛影响。
+          </p>
         </div>
 
         <!--关键词-->
@@ -86,7 +87,7 @@
           </div>
 
           <hr style="margin-top: -20px">
-          <div style="background-color: azure;width: 200px"><p>dxu0927@tongji.edu.cn</p></div>
+          <div style="background-color: azure;width: 200px"><p>sss@test.com</p></div>
         </div>
 
         <div style="margin: 70px auto;width: 95%">
@@ -100,7 +101,7 @@
           </div>
 
           <hr style="margin-top: -20px">
-          <div style="background-color: azure;width: 200px"><p>19923851828</p></div>
+          <div style="background-color: azure;width: 200px"><p>18101930934</p></div>
         </div>
 
         <!--工作经历-->
@@ -113,9 +114,9 @@
           <hr style="margin-top: -20px">
           <div style="background-color: azure">
             <el-table :data="tableData">
-              <el-table-column prop="date" label="Date"/>
-              <el-table-column prop="position" label="Position"/>
-              <el-table-column prop="address" label="Address"/>
+              <el-table-column prop="address" label="工作单位"/>
+              <el-table-column prop="author" label="职称"/>
+              <el-table-column prop="date" label="日期"/>
             </el-table>
           </div>
         </div>
@@ -170,7 +171,26 @@
                 <div style="display: flex; align-items: center;">
                   <el-icon size="110px"><Document /></el-icon>
                   <div style="display: flex; flex-direction: column; align-items: flex-start; width: 1000px;">
-                    <p style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;">Multimodal treatment for spinal cord injury; a sword of neuroregeneration upon neuromodulation	</p>
+                    <el-link :underline="false" style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;" href="https://pubmed.ncbi.nlm.nih.gov/30067297/">基于深度学习的图像分割技术</el-link>
+                    <p style="margin-top: 10px;margin-left: 37px;">张三 李四</p>
+                    <p style="margin-bottom: 10px;margin-left: 37px; font-weight: lighter; color: darkgray;">中国计算机杂志</p>
+                  </div>
+
+                  <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                    <el-button type="default" style="margin-top: 5px;margin-left: -60px ; color: #2c3e50;">编辑</el-button>
+                    <el-button type="default" style="margin-top: 15px;margin-left: -60px ; ">删除</el-button>
+                  </div>
+                </div>
+              </div>
+            </el-card>
+
+
+            <el-card style="height: 130px; width: 1600px;" shadow="hover" >
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center;">
+                  <el-icon size="110px"><Document /></el-icon>
+                  <div style="display: flex; flex-direction: column; align-items: flex-start; width: 1000px;">
+                    <el-link :underline="false" style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;" @click.native="$router.push('/123.pdf')">Multimodal treatment for spinal cord injury; a sword of neuroregeneration upon neuromodulation</el-link>
                     <p style="margin-top: 10px;margin-left: 37px;">Dongshen Xu</p>
                     <p style="margin-bottom: 10px;margin-left: 37px; font-weight: lighter; color: darkgray;">Neural Roneneration Rasearch</p>
                   </div>
@@ -188,7 +208,7 @@
                 <div style="display: flex; align-items: center;">
                   <el-icon size="110px"><Document /></el-icon>
                   <div style="display: flex; flex-direction: column; align-items: flex-start; width: 1000px;">
-                    <p style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;">Brain Endothelial Cell-Derived Exosomes Induce Neuroplasticity in Rats with Ischemia/Reperfusion Injury </p>
+                    <el-link :underline="false" style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;" @click.native="$router.push('/123.pdf')">Brain Endothelial Cell-Derived Exosomes Induce Neuroplasticity in Rats with Ischemia/Reperfusion Injury </el-link>
                     <p style="margin-top: 10px;margin-left: 37px;">Dongshen Xu</p>
                     <p style="margin-bottom: 10px;margin-left: 37px; font-weight: lighter; color: darkgray;">ACS Chemical Neuroscience</p>
                   </div>
@@ -206,7 +226,7 @@
                 <div style="display: flex; align-items: center;">
                   <el-icon size="110px"><Document /></el-icon>
                   <div style="display: flex; flex-direction: column; align-items: flex-start; width: 1000px;">
-                    <p style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;">Vascular Endothelial Cell-derived Exosomes Protect Neural Stem Cells Against Ischemia/reperfusion Injury  </p>
+                    <el-link :underline="false" style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;" @click.native="$router.push('/123.pdf')">Vascular Endothelial Cell-derived Exosomes Protect Neural Stem Cells Against Ischemia/reperfusion Injury  </el-link>
                     <p style="margin-top: 10px;margin-left: 37px;">Dongshen Xu</p>
                     <p style="margin-bottom: 10px;margin-left: 37px; font-weight: lighter; color: darkgray;">Neuroscience</p>
                   </div>
@@ -224,7 +244,7 @@
                 <div style="display: flex; align-items: center;">
                   <el-icon size="110px"><Document /></el-icon>
                   <div style="display: flex; flex-direction: column; align-items: flex-start; width: 1000px;">
-                    <p style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;">Multi-target synergistic enhanced neural circuit modulation: thinking and innovation  </p>
+                    <el-link :underline="false" style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;" @click.native="$router.push('/123.pdf')">Multi-target synergistic enhanced neural circuit modulation: thinking and innovation  </el-link>
                     <p style="margin-top: 10px;margin-left: 37px;">Dongshen Xu</p>
                     <p style="margin-bottom: 10px;margin-left: 37px; font-weight: lighter; color: darkgray;">Journal of Sichuan University (Medical Sciance Edition)</p>
                   </div>
@@ -242,8 +262,7 @@
                 <div style="display: flex; align-items: center;">
                   <el-icon size="110px"><Document /></el-icon>
                   <div style="display: flex; flex-direction: column; align-items: flex-start; width: 1000px;">
-                    <p style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;">Paired associated magnetic stimulation promotes neural repair in the rat middle cerebral artery occlusion model of
-                      stroke</p>
+                    <el-link :underline="false" style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;" @click.native="$router.push('/123.pdf')">Paired associated magnetic stimulation promotes neural repair in the rat middle cerebral artery occlusion model of stroke</el-link>
                     <p style="margin-top: 10px;margin-left: 37px;">Dongshen Xu</p>
                     <p style="margin-bottom: 10px;margin-left: 37px; font-weight: lighter; color: darkgray;">Noural Regeneration Reseatch</p>
                   </div>
@@ -330,26 +349,21 @@ export default {
   data() {
     return {
 
-      tableData2: [
+      tableData: [
         {
-          date: 'Multimodal treatment for spinal cord injury; a sword of neuroregeneration upon neuromodulation',
-          name: 'Dongshen Xu',
-          author: 'Neural Roneneration Rasearch',
+          date: '2008.06-2012.09',
+          address: '北京大学',
+          author: '讲师',
         },
         {
-          date: '2016-05-02',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
+          date: '2012.06-2014.09',
+          address: '北京大学',
+          author: '副教授',
         },
         {
-          date: '2016-05-04',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-        },
-        {
-          date: '2016-05-01',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
+          date: '2014.06-2018.09',
+          address: '北京大学',
+          author: '教授',
         },
       ],
 
@@ -400,7 +414,7 @@ export default {
 
 // 标签
     const inputValue = ref('')
-    const dynamicTags = ref(['再生康复医学', '神经调控'])
+    const dynamicTags = ref(['物理学', '光学'])
     const inputVisible = ref(false)
     const InputRef = ref(null)
 

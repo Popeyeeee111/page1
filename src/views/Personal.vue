@@ -1,292 +1,132 @@
 <template>
-  <div style="display: flex; align-items: center; cursor: pointer;">
-    <img src="../assets/school.jpg" alt="图标" style="width: 200px; height: 50px; margin-right: 10px;"
-         @click="handleClick">
-    <div style="display: flex; margin: 0 auto">
-      <el-input v-model="input" style="width: 240px;" placeholder="搜索"/>
-      <el-button :icon="Search" circle style="margin-left: 5px "/>
-    </div>
-    <el-button style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);margin-right: 10px">退出登录</el-button>
-  </div>
+  <el-row>
+    <el-col :span="8">
+      <router-link to="/">
+        <img src="/static/school.jpg" alt="图标" style="width: 200px; height: 50px">
+      </router-link>
+    </el-col>
+    <el-col :span="8"/>
+  </el-row>
 
+  <el-row>
+    <el-col :span="2"/>
+    <el-col :span="20">
+      <div style="height: 200px;background-color: aliceblue;margin-left: 10px;margin-right: 10px;margin-top: 20px ">
+        <el-avatar style="height: 120px;width:120px;margin-top: 10px" :src="professorBasicInfo.avatar"/>
+        <p style="font-size: 20px;font-weight: bold">{{professorBasicInfo.name}}</p>
+      </div>
+    </el-col>
+    <el-col :span="2"/>
+  </el-row>
 
-  <div style="height: 200px;background-color: aliceblue;margin-left: 10px;margin-right: 10px;margin-top: 20px ">
-    <el-avatar style="height: 120px;width:120px;margin-top: 10px"
-               :src="require('@/assets/Teacher.png')"
-    />
-    <p style="font-size: 20px;font-weight: bold">张三</p>
-  </div>
-
-  <div>
-    <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick1">
-      <el-tab-pane  label="主页"  name="first" >
-        <!--数据框-->
-        <div class="container">
-          <div class="row" style="margin-left: 30px;margin-right: 30px">
-            <div class="item">项目</div>
-            <div class="item">成果</div>
-            <div class="item">阅读</div>
-            <div class="item">下载</div>
-            <div class="item">被引</div>
-          </div>
-          <div class="row" style="text-indent: 12px;margin-left:30px;margin-right: 30px">
-            <div class="item">2</div>
-            <div class="item" style="text-indent: 30px">987</div>
-            <div class="item " style="text-indent: 20px">755</div>
-            <div class="item" style="text-indent: 20px">14</div>
-            <div class="item" style="">41905</div>
-          </div>
-        </div>
-
-        <!--  个人简介-->
-        <div style="margin: 40px auto;width: 95%">
-          <p style="font-weight: bold;font-size: 30px;display: flex">个人简介</p>
-          <hr style="margin-top: -20px">
-          <p style="display: flex;flex-wrap: wrap;">
-            长期致力于磁性体表面和界面性质理论，表面吸附和表面电子性质理论， 晶体光学性质的理论计算研究， 和计算凝聚态物理理论方法的发展。在磁性和表面物理研究中作出了突出贡献，在国内获得过国家和院级奖励三次，在国际上有广泛影响。
-          </p>
-        </div>
-
-        <!--关键词-->
-        <div style="margin: 70px auto;width: 95%">
-          <p style="font-weight: bold;font-size: 30px;display: flex">关键词</p>
-          <hr style="margin-top: -20px">
-          <div style="display: flex">
-            <el-tag
-                v-for="tag in dynamicTags"
-                :key="tag"
-                closable
-                :disable-transitions="false"
-                @close="handleClose(tag)"
-            >
-              {{ tag }}
-            </el-tag>
-            <el-input
-                v-if="inputVisible"
-                ref="InputRef"
-                v-model="inputValue"
-                class="w-20"
-                size="small"
-                @keyup.enter="handleInputConfirm"
-                @blur="handleInputConfirm"
-            />
-            <el-button v-else class="button-new-tag" size="small" @click="showInput">
-              + New Tag
-            </el-button>
-          </div>
-        </div>
-
-        <div style="margin: 70px auto;width: 95%">
-          <div style="display: flex;align-items: center;">
-            <p style="font-weight: bold;font-size: 30px;display: flex">邮箱
-              <el-icon size="40px">
-                <Message/>
-              </el-icon>
-            </p>
-            <el-button style="margin-left:1320px" type="default" :icon="Edit" circle/>
+  <el-row>
+    <el-col :span="2"/>
+    <el-col :span="20">
+      <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick1">
+        <el-tab-pane  name="first" >
+          <template #label>
+            <span class="personal-tabs-header-text">主页</span>
+          </template>
+          <!--数据框-->
+          <div class="container">
+            <div class="row" style="margin-left: 30px;margin-right: 30px">
+              <div class="item">项目</div>
+              <div class="item">成果</div>
+              <div class="item">阅读</div>
+              <div class="item">下载</div>
+              <div class="item">被引</div>
+            </div>
+            <div class="row" style="text-indent: 12px;margin-left:30px;margin-right: 30px">
+              <div class="item">2</div>
+              <div class="item" style="text-indent: 30px">987</div>
+              <div class="item " style="text-indent: 20px">755</div>
+              <div class="item" style="text-indent: 20px">14</div>
+              <div class="item" style="">41905</div>
+            </div>
           </div>
 
-          <hr style="margin-top: -20px">
-          <div style="background-color: azure;width: 200px"><p>sss@test.com</p></div>
-        </div>
+          <!--  个人简介-->
+          <personal-introduction-separator menu-name="个人简介">
+            <p style="text-align: left">{{professorBasicInfo.introduction}}</p>
+          </personal-introduction-separator>
 
-        <div style="margin: 70px auto;width: 95%">
-          <div style="display: flex;align-items: center;">
-            <p style="font-weight: bold;font-size: 30px;display: flex">电话
-              <el-icon size="40px">
-                <Phone/>
-              </el-icon>
-            </p>
-            <el-button style="margin-left:1320px" type="default" :icon="Edit" circle/>
-          </div>
+          <!--关键词-->
+          <personal-introduction-separator menu-name="关键词">
+            <div style="display: flex">
+              <el-tag v-for="tag in professorBasicInfo.keyword" :key="tag" :disable-transitions="false" @close="handleClose">
+                {{ tag }}
+              </el-tag>
+            </div>
+          </personal-introduction-separator>
 
-          <hr style="margin-top: -20px">
-          <div style="background-color: azure;width: 200px"><p>18101930934</p></div>
-        </div>
+          <!--邮箱-->
+          <personal-introduction-separator menu-name="邮箱">
+            <div style="background-color: azure;width: 200px">
+              <p>{{professorBasicInfo.email}}</p>
+            </div>
+          </personal-introduction-separator>
 
-        <!--工作经历-->
-        <div style="margin: 70px auto;width: 95%">
-          <div style="display: flex;align-items: center">
-            <p style="font-weight: bold;font-size: 30px;display: flex">工作经历</p>
-            <el-button style="margin-left:1300px" type="default" :icon="Plus" circle/>
-          </div>
+          <!--电话-->
+          <personal-introduction-separator menu-name="电话">
+            <div style="background-color: azure;width: 200px">
+              <p>{{professorBasicInfo.phone}}</p>
+            </div>
+          </personal-introduction-separator>
 
-          <hr style="margin-top: -20px">
-          <div style="background-color: azure">
-            <el-table :data="tableData">
-              <el-table-column prop="address" label="工作单位"/>
-              <el-table-column prop="author" label="职称"/>
-              <el-table-column prop="date" label="日期"/>
-            </el-table>
-          </div>
-        </div>
-      </el-tab-pane>
+          <!--工作经历-->
+          <personal-introduction-separator menu-name="工作经历">
+            <div style="background-color: azure">
+              <el-table :data="professorBasicInfo.resume">
+                <el-table-column prop="address" label="工作单位" align="center"/>
+                <el-table-column prop="author" label="职称" align="center"/>
+                <el-table-column prop="date" label="日期" align="center"/>
+              </el-table>
+            </div>
+          </personal-introduction-separator>
+        </el-tab-pane>
 
 
-      <!--      成果-->
-      <el-tab-pane label="成果" name="second">
-        <div style="display: flex;margin-top: -12px">
-          <el-col :span="6" >
+        <!--成果-->
+        <el-tab-pane name="second">
+          <template #label>
+            <span class="personal-tabs-header-text">成果</span>
+          </template>
+          <div style="display: flex; margin-top: -12px">
+            <el-col :span="6" >
 
-            <el-menu
-                default-active="2"
-                class="el-menu-vertical-demo"
-                @open="handleOpen"
-                @close="handleClose"
-                style="height: 100vh"
-            >
-              <el-sub-menu index="1">
-                <template #title>
-                  <el-icon><location /></el-icon>
-                  <span>年份</span>
-                </template>
-                <el-menu-item-group title="Group One">
+              <el-menu default-active="2" @close="handleClose">
+                <el-sub-menu index="1">
+                  <template #title>
+                    <span>年份</span>
+                  </template>
                   <el-menu-item index="1-1">item one</el-menu-item>
                   <el-menu-item index="1-2">item two</el-menu-item>
-                </el-menu-item-group>
-                <el-menu-item-group title="Group Two">
                   <el-menu-item index="1-3">item three</el-menu-item>
-                </el-menu-item-group>
-                <el-sub-menu index="1-4">
-                  <template #title>item four</template>
-                  <el-menu-item index="1-4-1">item one</el-menu-item>
                 </el-sub-menu>
-              </el-sub-menu>
-              <el-menu-item index="2">
-                <el-icon><icon-menu /></el-icon>
-                <span>成果类型</span>
-              </el-menu-item>
+                <el-menu-item index="2">
+                  <template #title>
+                    <span>成果类型</span>
+                  </template>
+                </el-menu-item>
 
-            </el-menu>
-          </el-col>
+              </el-menu>
+            </el-col>
 
 
 
-          <div style="width: 100%">
-            <div style="display: flex">
-              <p style="text-indent: 5px">H指数:113  成果:123</p>
+            <div style="width: 100%">
+              <div style="display: flex">
+                <p style="text-indent: 5px">H指数:113  成果:123</p>
+              </div>
+              <personal-professor-fruit v-for="fruit in professorFruit" :key="fruit.id" :publisher="fruit.fruitBaseIn"
+                                        :link="fruit.fruitOutLink" :author="fruit.authorNames" :title="fruit.name"/>
             </div>
-            <el-card style="height: 130px; width: 1600px;" shadow="hover" >
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center;">
-                  <el-icon size="110px"><Document /></el-icon>
-                  <div style="display: flex; flex-direction: column; align-items: flex-start; width: 1000px;">
-                    <el-link :underline="false" style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;" href="https://pubmed.ncbi.nlm.nih.gov/30067297/">基于深度学习的图像分割技术</el-link>
-                    <p style="margin-top: 10px;margin-left: 37px;">张三 李四</p>
-                    <p style="margin-bottom: 10px;margin-left: 37px; font-weight: lighter; color: darkgray;">中国计算机杂志</p>
-                  </div>
-
-                  <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                    <el-button type="default" style="margin-top: 5px;margin-left: -60px ; color: #2c3e50;">编辑</el-button>
-                    <el-button type="default" style="margin-top: 15px;margin-left: -60px ; ">删除</el-button>
-                  </div>
-                </div>
-              </div>
-            </el-card>
-
-
-            <el-card style="height: 130px; width: 1600px;" shadow="hover" >
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center;">
-                  <el-icon size="110px"><Document /></el-icon>
-                  <div style="display: flex; flex-direction: column; align-items: flex-start; width: 1000px;">
-                    <el-link :underline="false" style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;" @click.native="window.open('/123.pdf', 'newTab')">Multimodal treatment for spinal cord injury; a sword of neuroregeneration upon neuromodulation</el-link>
-                    <p style="margin-top: 10px;margin-left: 37px;">Dongshen Xu</p>
-                    <p style="margin-bottom: 10px;margin-left: 37px; font-weight: lighter; color: darkgray;">Neural Roneneration Rasearch</p>
-                  </div>
-
-                  <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                    <el-button type="default" style="margin-top: 5px;margin-left: -60px ; color: #2c3e50;">编辑</el-button>
-                    <el-button type="default" style="margin-top: 15px;margin-left: -60px ; ">删除</el-button>
-                  </div>
-                </div>
-              </div>
-            </el-card>
-
-            <el-card style="height: 130px; width: 1600px;" shadow="hover" >
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center;">
-                  <el-icon size="110px"><Document /></el-icon>
-                  <div style="display: flex; flex-direction: column; align-items: flex-start; width: 1000px;">
-                    <el-link :underline="false" style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;" @click.native="$router.push('/123.pdf')">Brain Endothelial Cell-Derived Exosomes Induce Neuroplasticity in Rats with Ischemia/Reperfusion Injury </el-link>
-                    <p style="margin-top: 10px;margin-left: 37px;">Dongshen Xu</p>
-                    <p style="margin-bottom: 10px;margin-left: 37px; font-weight: lighter; color: darkgray;">ACS Chemical Neuroscience</p>
-                  </div>
-
-                  <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                    <el-button type="default" style="margin-top: 5px;margin-left: -60px ; color: #2c3e50;">编辑</el-button>
-                    <el-button type="default" style="margin-top: 15px;margin-left: -60px ; ">删除</el-button>
-                  </div>
-                </div>
-              </div>
-            </el-card>
-
-            <el-card style="height: 130px; width: 1600px;" shadow="hover" >
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center;">
-                  <el-icon size="110px"><Document /></el-icon>
-                  <div style="display: flex; flex-direction: column; align-items: flex-start; width: 1000px;">
-                    <el-link :underline="false" style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;" @click.native="$router.push('/123.pdf')">Vascular Endothelial Cell-derived Exosomes Protect Neural Stem Cells Against Ischemia/reperfusion Injury  </el-link>
-                    <p style="margin-top: 10px;margin-left: 37px;">Dongshen Xu</p>
-                    <p style="margin-bottom: 10px;margin-left: 37px; font-weight: lighter; color: darkgray;">Neuroscience</p>
-                  </div>
-
-                  <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                    <el-button type="default" style="margin-top: 5px;margin-left: -60px ; color: #2c3e50;">编辑</el-button>
-                    <el-button type="default" style="margin-top: 15px;margin-left: -60px ; ">删除</el-button>
-                  </div>
-                </div>
-              </div>
-            </el-card>
-
-            <el-card style="height: 130px; width: 1600px;" shadow="hover" >
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center;">
-                  <el-icon size="110px"><Document /></el-icon>
-                  <div style="display: flex; flex-direction: column; align-items: flex-start; width: 1000px;">
-                    <el-link :underline="false" style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;" @click.native="$router.push('/123.pdf')">Multi-target synergistic enhanced neural circuit modulation: thinking and innovation  </el-link>
-                    <p style="margin-top: 10px;margin-left: 37px;">Dongshen Xu</p>
-                    <p style="margin-bottom: 10px;margin-left: 37px; font-weight: lighter; color: darkgray;">Journal of Sichuan University (Medical Sciance Edition)</p>
-                  </div>
-
-                  <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                    <el-button type="default" style="margin-top: 5px;margin-left: -60px ; color: #2c3e50;">编辑</el-button>
-                    <el-button type="default" style="margin-top: 15px;margin-left: -60px ; ">删除</el-button>
-                  </div>
-                </div>
-              </div>
-            </el-card>
-
-            <el-card style="height: 130px; width: 1600px;" shadow="hover" >
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center;">
-                  <el-icon size="110px"><Document /></el-icon>
-                  <div style="display: flex; flex-direction: column; align-items: flex-start; width: 1000px;">
-                    <el-link :underline="false" style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;" @click.native="$router.push('/123.pdf')">Paired associated magnetic stimulation promotes neural repair in the rat middle cerebral artery occlusion model of stroke</el-link>
-                    <p style="margin-top: 10px;margin-left: 37px;">Dongshen Xu</p>
-                    <p style="margin-bottom: 10px;margin-left: 37px; font-weight: lighter; color: darkgray;">Noural Regeneration Reseatch</p>
-                  </div>
-
-                  <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                    <el-button type="default" style="margin-top: 5px;margin-left: -60px ; color: #2c3e50;">编辑</el-button>
-                    <el-button type="default" style="margin-top: 15px;margin-left: -60px ; ">删除</el-button>
-                  </div>
-                </div>
-              </div>
-            </el-card>
           </div>
-
-
-        </div>
-
-
-
-
-
-
-      </el-tab-pane>
-    </el-tabs>
-  </div>
+        </el-tab-pane>
+      </el-tabs>
+    </el-col>
+    <el-col :span="2"/>
+  </el-row>
 
 
 </template>
@@ -326,180 +166,111 @@
   line-height: 1; /* 设置行高为1，可根据需要调整 */
   text-align: center; /* 水平居中对齐 */
 }
-
-.custom:hover{
-  filter: grayscale(200%);
+.personal-tabs-header-text{
+  font-size: 1rem;
 }
 </style>
 
 
-<script>
-import {Search, Edit, Plus, House} from "@element-plus/icons-vue";
-import {ref, nextTick} from 'vue'
-import {ElInput} from 'element-plus'
-// TODO 进入学者页面，首先从路由参数取出学者id，再根据ussUserStore和useUserFruitStore中的外键信息寻找研究成果
+<script setup>
+import {ref} from 'vue'
+import {useRoute} from "vue-router";
+const route = useRoute()
+const professorId = route.query.id
 
-export default {
-  components: {House},
-  created() {
-    console.log(this.id)
-  },
-  // 表格数据
-  data() {
-    return {
+// 防止出事，这里也用一下pinia的订阅机制
+import {useProfessorStore} from "@/store";
+import PersonalIntroductionSeparator from "@/component/personal-introduction-separator.vue";
+import PersonalProfessorFruit from "@/component/personal-professor-fruit.vue";
+const professorStore = useProfessorStore();
+const {setProfessorAndProfessorStore} = professorStore
+setProfessorAndProfessorStore()
+const professorBasicInfo = ref({
+  name: null,
+  introduction: null,
+  // 关键词，用分号分割成列表
+  keyword: [],
+  email: null,
+  phone: null,
+  // 用\r\n分割成列表
+  resume: [],
+  // 头像
+  avatar: null,
+  // 是否首页展示0否1是
+  indexViewFlag: null,
+  // 职称，用于首页显示
+  positionRemark: null
+})
+// 这里的成果直接全部取出，分页的时候再做处理
+const professorFruit = ref([])
+// 成果计数
+const totalFruitCount = ref()
+// 消息订阅，就算之前有pinia记录也要做一次确保用户不从首页进来也可以访问到
+professorStore.$subscribe(
+    (mutation, state) => {
 
-      tableData: [
-        {
-          date: '2008.06-2012.09',
-          address: '北京大学',
-          author: '讲师',
-        },
-        {
-          date: '2012.06-2014.09',
-          address: '北京大学',
-          author: '副教授',
-        },
-        {
-          date: '2014.06-2018.09',
-          address: '北京大学',
-          author: '教授',
-        },
-      ],
-      window: window,
-      id: this.$route.query.id
-
-
-      // tableData: [
-      //   {
-      //     date: '2019-10-01至2019-10-01',
-      //     position: '教授',
-      //     address: '同济大学 同济大学医学院',
-      //   },
-      //   {
-      //     date: '2019-10-01至2022-4-30',
-      //     position: '教授',
-      //     address: '上海中医药大学 康复医学院',
-      //   },
-      //
-      //
-      // ],
-      //
-      // tableData1: [
-      //   {
-      //     date: '2019-10-01至2019-10-01',
-      //     position: '教授',
-      //     address: '同济大学 同济大学医学院',
-      //   },
-      //   {
-      //     date: '2019-10-01至2022-4-30',
-      //     position: '教授',
-      //     address: '上海中医药大学 康复医学院',
-      //   },
-      //
-      //
-      // ]
-    };
-  },
-
-
-  setup() {
-
-
-
-    // 分页
-    const activeName = ref('first');
-
-    const handleClick1 = (tab, event) => {
-      console.log(tab, event);
-    };
-
-// 标签
-    const inputValue = ref('')
-    const dynamicTags = ref(['物理学', '光学'])
-    const inputVisible = ref(false)
-    const InputRef = ref(null)
-
-    const handleClose = (tag) => {
-      dynamicTags.value.splice(dynamicTags.value.indexOf(tag), 1)
-    }
-
-    const showInput = () => {
-      inputVisible.value = true
-      nextTick(() => {
-        InputRef.value.focus()
-
-      })
-    }
-
-    const handleInputConfirm = () => {
-      if (inputValue.value) {
-        dynamicTags.value.push(inputValue.value)
+      // 根据学者id取学者
+      function getProfessorById(id){
+        const idIndex = state.professor.header.indexOf('id')
+        const obj = {}
+        state.professor.body.forEach((element) => {
+          if (element[idIndex]==id){
+            element.forEach((attr, index)=>{
+              obj[state.professor.header[index]] = attr
+            })
+          }
+        })
+        return obj;
       }
-      inputVisible.value = false
-      inputValue.value = ''
-    }
 
-    return {
-      inputValue,
-      dynamicTags,
-      inputVisible,
-      InputRef,
-      handleClose,
-      showInput,
-      handleInputConfirm,
-
-      activeName,
-      handleClick1,
-
-
-    }
-  },
-
-  //其他
-  computed: {
-    Plus() {
-      return Plus
+      // 根据学者id取学者成果
+      function getProfessorFruitById(id){
+        const authorIdIndex = state.professorFruit.header.indexOf('authors')
+        let ret = []
+        state.professorFruit.body.forEach((element) => {
+          const authList = element[authorIdIndex].toString().replace('，',',').replace(' ','').split(',')
+          if(authList.includes(id.toString())){
+            const obj = {}
+            element.forEach((attr, index) => {
+              obj[state.professorFruit.header[index]] = attr
+            })
+            ret.push(obj)
+          }
+        })
+        return ret
+      }
+      const obj = getProfessorById(professorId);
+      Object.keys(obj).length===0?console.log("非法ID输入！"):professorBasicInfo.value=obj
+      // 特殊处理关键词和个人简介
+      if(Object.keys(obj).length!==0){
+        professorBasicInfo.value.keyword = obj.keyword.replace('；', ';').split(';')
+        professorBasicInfo.value.resume = obj.resume.split("\r\n").map(element => {
+          const row = element.replace('：', ':').split(':')
+          return {
+            date: row[0],
+            address: row[1],
+            author: row[2]
+          }
+        })
+      }
+      professorFruit.value = getProfessorFruitById(professorId)
+      totalFruitCount.value = professorFruit.value.length
     },
-    Edit() {
-      return Edit
-    },
-    Search() {
-      return Search
-    }
-  },
-  methods: {
-    handleClick() {
-      this.$router.push('/');
-    },
+    { detached: false }
+)
 
-    handleEdit(index, row) {
-      console.log(index, row)
-    },
-    handleDelete(index, row) {
-      console.log(index, row)
-    }
-  },
+
+const activeName = ref('second');
+
+const handleClick1 = (tab, event) => {
+  console.log(tab, event);
+};
+
+const handleClose = () => {
+  return false
 }
+
+
 </script>
 
-<style>
-.infinite-list {
-  height: 300px;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-.infinite-list .infinite-list-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50px;
-  background: var(--el-color-primary-light-9);
-  margin: 10px;
-  color: var(--el-color-primary);
-}
-.infinite-list .infinite-list-item + .list-item {
-  margin-top: 10px;
-}
-</style>
 

@@ -16,7 +16,7 @@ const props = defineProps({
 
 <template>
   <router-link :to="{path:'/personal',query: {id: props.id}}">
-    <el-card>
+    <el-card style="border-radius: 20px">
       <el-avatar
           :src="props.avatar" style="width: 100px; height: 100px"
       />

@@ -5,14 +5,14 @@
 -->
 
 <script setup>
-import {useProfessorStore} from "@/store";
 import {ref} from "vue";
+import {useProfessorStore} from "@/store";
 // 教授信息数据共享组件
 const professorStore = useProfessorStore();
 const {setProfessorAndProfessorStore} = professorStore
 // 教授成果数据共享组件
 
-// 初始化两个excel表
+// 初始化pinia的状态
 setProfessorAndProfessorStore();
 
 

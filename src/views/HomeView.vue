@@ -18,7 +18,7 @@
       <div
           style="margin: 10px; backdrop-filter: blur(2px); width: 600px; height: 80px; display: flex; justify-content:center">
         <div style="display: flex; justify-content: center; align-items: center;">
-          <el-select v-model="value" placeholder="请选择" size="large" style="width: 130px">
+          <el-select v-model="value" placeholder="请选择" size="large" style="width: 100px">
             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"/>
           </el-select>
           <el-input v-model="input1" style="width: 240px; height: 40px" placeholder="查找内容"/>
@@ -150,24 +150,12 @@ source1.value = 1200
 const value = ref('')
 const options = [
   {
-    value: 'Option1',
-    label: 'Option1',
+    value: 'person',
+    label: '学者',
   },
   {
-    value: 'Option2',
-    label: 'Option2',
-  },
-  {
-    value: 'Option3',
-    label: 'Option3',
-  },
-  {
-    value: 'Option4',
-    label: 'Option4',
-  },
-  {
-    value: 'Option5',
-    label: 'Option5',
+    value: 'fruit',
+    label: '成果',
   },
 ]
 

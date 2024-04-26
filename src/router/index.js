@@ -17,4 +17,12 @@ const router = createRouter({
   routes
 })
 
+// 全局守卫配置
+// router.beforeEach((to, from, next) => {
+//   if(to.name==='home') {
+//     // 在此处完成setPinia
+//
+//   }
+// })
+
 export default router

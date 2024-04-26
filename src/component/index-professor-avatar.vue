@@ -1,6 +1,6 @@
 <!--
 -- @author Santa Antilles
--- @description
+-- @description 首页学者展示框
 -- @date 2024/4/26-10:28:19
 -->
 

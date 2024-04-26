@@ -1,14 +1,11 @@
-import { createStore } from 'vuex'
+import {createPinia, defineStore} from "pinia";
 
-export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
-})
+
+
+const pinia = createPinia()
+// 默认导出给main.js挂载
+export default pinia
+
+export * from "./useProfessorStore"
+export * from "./useProfessorFruitStore"
+

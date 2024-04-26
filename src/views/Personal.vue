@@ -190,7 +190,7 @@
                 <div style="display: flex; align-items: center;">
                   <el-icon size="110px"><Document /></el-icon>
                   <div style="display: flex; flex-direction: column; align-items: flex-start; width: 1000px;">
-                    <el-link :underline="false" style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;" @click.native="$router.push('/123.pdf')">Multimodal treatment for spinal cord injury; a sword of neuroregeneration upon neuromodulation</el-link>
+                    <el-link :underline="false" style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;" @click.native="window.open('/123.pdf', 'newTab')">Multimodal treatment for spinal cord injury; a sword of neuroregeneration upon neuromodulation</el-link>
                     <p style="margin-top: 10px;margin-left: 37px;">Dongshen Xu</p>
                     <p style="margin-bottom: 10px;margin-left: 37px; font-weight: lighter; color: darkgray;">Neural Roneneration Rasearch</p>
                   </div>
@@ -291,10 +291,6 @@
 
 </template>
 
-<script>
-
-</script>
-
 <style scoped lang="scss">
 .demo-type {
   display: flex;
@@ -338,13 +334,16 @@
 
 
 <script>
-import { Timer } from '@element-plus/icons-vue'
 import {Search, Edit, Plus, House} from "@element-plus/icons-vue";
 import {ref, nextTick} from 'vue'
 import {ElInput} from 'element-plus'
+// TODO 进入学者页面，首先从路由参数取出学者id，再根据ussUserStore和useUserFruitStore中的外键信息寻找研究成果
 
 export default {
   components: {House},
+  created() {
+    console.log(this.id)
+  },
   // 表格数据
   data() {
     return {
@@ -366,6 +365,8 @@ export default {
           author: '教授',
         },
       ],
+      window: window,
+      id: this.$route.query.id
 
 
       // tableData: [

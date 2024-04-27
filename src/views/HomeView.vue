@@ -178,7 +178,7 @@ const options = [
     label: '学者',
   },
   {
-    value: 'fruit',
+    value: 'fruitQ',
     label: '成果',
   },
 ]

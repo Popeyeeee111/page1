@@ -12,7 +12,7 @@ import IndexProfessorFruit from "@/component/index-professor-fruit.vue";
 
 const route = useRoute()
 // 查询参数为成果名
-const fruitQueryParams = route.query.fruit
+const fruitQueryParams = route.query.fruitQ
 const professorStore = useProfessorStore();
 const {setProfessorAndProfessorStore} = professorStore
 setProfessorAndProfessorStore()

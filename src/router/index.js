@@ -26,8 +26,8 @@ const routes = [
     component: ()=>import('@/views/query/professor-query.vue')
   },
   {
-    path: '/fruit',
-    name: 'fruit',
+    path: '/fruitQ',
+    name: 'fruitQ',
     component: ()=>import('@/views/query/fruit-query.vue')
   }
 ]

@@ -22,7 +22,7 @@
             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"/>
           </el-select>
           <el-input v-model="input1" style="width: 240px; height: 40px" placeholder="查找内容"/>
-          <el-button type="primary" style="height: 40px">
+          <el-button type="primary" style="height: 40px" @click="handleQuery">
             <el-icon style="margin: 5px">
               <search/>
             </el-icon>
@@ -77,12 +77,14 @@
 import {ref} from 'vue';
 import {useTransition} from '@vueuse/core'
 import IndexProfessorAvatar from "@/component/index-professor-avatar.vue";
+import router from '@/router'
 /**
  * 进入首页，把两张表全部初始化好
  *
  */
 import {useProfessorStore} from "@/store";
 import IndexProfessorFruit from "@/component/index-professor-fruit.vue";
+import {ElMessage} from "element-plus";
 const professorStore = useProfessorStore();
 const {setProfessorAndProfessorStore} = professorStore
 // 需要展示的学者信息
@@ -134,6 +136,28 @@ professorStore.$subscribe(
     {detached: false}
 )
 
+const handleQuery = ()=>{
+  const type = value.value
+  const queryInfo = input1.value
+  if (isValidInput(type)&&isValidInput(queryInfo)){
+    router.push({
+      name: type,
+      query: {[type]: queryInfo}
+    })
+  }else{
+    ElMessage.error("请前选择检索类型或输入检索参数！")
+  }
+}
+
+function isValidInput(inputString){
+  if (!inputString){
+    return false
+  }
+  if (inputString.trim()===''){
+    return false
+  }
+  return true
+}
 
 const activeIndex = ref('1')
 const input1 = ref('')
@@ -150,7 +174,7 @@ source1.value = 1200
 const value = ref('')
 const options = [
   {
-    value: 'person',
+    value: 'professor',
     label: '学者',
   },
   {

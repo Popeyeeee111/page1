@@ -19,6 +19,16 @@ const routes = [
     path: '/fruit',
     name: 'fruit',
     component: ()=>import('@/views/AboutView.vue')
+  },
+  {
+    path: '/professor',
+    name: 'professor',
+    component: ()=>import('@/views/query/professor-query.vue')
+  },
+  {
+    path: '/fruit',
+    name: 'fruit',
+    component: ()=>import('@/views/query/fruit-query.vue')
   }
 ]
 

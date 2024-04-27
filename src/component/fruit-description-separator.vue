@@ -1,7 +1,7 @@
 <!--
 -- @author Santa Antilles
 -- @description
--- @date 2024/4/26-23:33:52
+-- @date 2024/4/27-15:17:37
 -->
 
 <script setup>
@@ -11,9 +11,8 @@ const props = defineProps({
 </script>
 
 <template>
-  <div style="width: 95%;">
-    <p style="font-weight: bold; font-size: 1.5rem; display: flex">{{props.menuName}}</p>
-    <hr style="margin-top: -20px">
+  <div style="width: 95%; margin-top: 30px;">
+    <div style="font-size: 1.3rem; display: flex; font-weight: 500;">{{props.menuName}}</div>
     <slot></slot>
   </div>
 </template>

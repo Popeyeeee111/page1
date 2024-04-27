@@ -119,7 +119,8 @@
                 <p style="text-indent: 5px">H指数:113  成果:123</p>
               </div>
               <personal-professor-fruit v-for="fruit in professorFruit" :key="fruit.id" :publisher="fruit.fruitBaseIn"
-                                        :link="fruit.fruitOutLink" :author="fruit.authorNames" :title="fruit.name"/>
+                                        :link="fruit.fruitOutLink" :author="fruit.authorNames" :id="fruit.id"
+                                        :title="fruit.fruitName"/>
             </div>
           </div>
         </el-tab-pane>

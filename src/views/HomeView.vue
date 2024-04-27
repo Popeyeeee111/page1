@@ -30,7 +30,7 @@
         </div>
       </div>
     </el-container>
-    <el-row :gutter="20" style="margin-top: 20px">
+    <el-row style="margin-top: 20px">
       <el-col :span="12">
         <el-statistic title="成果" :value="progress"/>
       </el-col>
@@ -60,11 +60,11 @@
           <p style="margin-left: auto; margin-right: 10px; cursor: pointer; font-weight: bold; color: white; font-size: 1.5rem" >
             MORE</p>
         </el-header>
-        <el-row style="overflow-y: scroll">
+        <el-row style="overflow-y: scroll" class="fruit-item">
           <el-col :span="24">
             <div style="margin: 20px">
               <index-professor-fruit v-for="fruit in toDisplayFruit" :title="fruit.fruitName" :author="fruit.authorNames"
-                                     :link="fruit.fruitOutLink" :publisher="fruit.fruitBaseIn" :key="fruit.id"/>
+                                     :link="fruit.fruitOutLink" :publisher="fruit.fruitBaseIn" :key="fruit.id" :id="fruit.id"/>
             </div>
           </el-col>
         </el-row>
@@ -161,7 +161,7 @@ const options = [
 
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .background-image-container {
   background-image: url('@/assets/back.jpg');
   background-position: center; /* 图片居中显示 */
@@ -173,5 +173,18 @@ const options = [
   color: white; /* 文字颜色 */
   background-repeat: no-repeat;
   position: relative;
+}
+.fruit-item::-webkit-scrollbar{
+  height: 0;
+  width: 0;
+}
+:deep(.el-select__wrapper){
+  border-radius: 0 !important;
+}
+:deep(.el-input__wrapper){
+  border-radius: 0 !important;
+}
+:deep(.el-button){
+  border-radius: 0 !important;
 }
 </style>

@@ -13,6 +13,7 @@ const RESOURCE_PATH = '/xlsx/professorStore.xlsx'
 const PROFESSOR_SHEET_NAME = 'professor';
 const PROFESSOR_FRUIT_SHEET_NAME = 'professorFruit';
 
+const HOST = process.env.VUE_APP_HOST
 
 export const useProfessorStore = defineStore(
     'professorStore',
@@ -22,7 +23,7 @@ export const useProfessorStore = defineStore(
 
         const setProfessorAndProfessorStore = ()=>{
             axios.get(
-                `http://localhost:${process.env.VUE_APP_SERVER_PORT}${RESOURCE_PATH}`,
+                `http://${HOST}:${process.env.VUE_APP_SERVER_PORT}${RESOURCE_PATH}`,
                 { responseType: 'arraybuffer' }
             ).then(res => {
                 const data = new Uint8Array(res.data);

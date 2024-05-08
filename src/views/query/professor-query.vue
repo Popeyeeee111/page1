@@ -23,6 +23,18 @@ professorStore.$subscribe((mutation, state)=>{
   function find(param){
     const tb_head = state.professor.header
     const tb_body = state.professor.body
+
+
+    if(!param){
+      tb_body.forEach(element => {
+        const obj = {}
+        element.forEach((attr, index) => {
+          obj[tb_head[index]] = attr
+        })
+        satisfiedFruits.value.push(obj)
+      })
+      return
+    }
     // 检索姓名、简介、职称
     const args = [tb_head.indexOf('name'), tb_head.indexOf('introduction'), tb_head.indexOf('positionRemark')]
     tb_body.forEach(element => {
@@ -54,23 +66,26 @@ function sqlLike(input, pattern){
 
 <template>
   <el-row>
+    <el-col :span="8"  v-if="satisfiedFruits.length===0">
+      <h2>当前指定的搜素条件没有符合的记录！</h2>
+    </el-col>
+    <el-col v-else :span="8">
+      <h2>根据您选择的筛选条件，共有{{satisfiedFruits.length}}条记录</h2>
+    </el-col>
+  </el-row>
+  <el-row>
     <el-col :span="8">
       <router-link to="/">
         <img src="/static/school.jpg" alt="图标" style="width: 200px; height: 50px">
       </router-link>
     </el-col>
   </el-row>
-  <el-row style="overflow-y: scroll" class="fruit-item">
+  <el-row class="fruit-item">
     <el-col :span="24">
       <div style="margin: 20px">
         <index-professor-avatar v-for="professor in satisfiedFruits" :introduction="professor.positionRemark" :id="professor.id"
                                 :avatar="professor.avatar" :name="professor.name"/>
       </div>
-    </el-col>
-  </el-row>
-  <el-row v-show="satisfiedFruits.length===0">
-    <el-col :span="8">
-      <h2>当前指定的搜素条件没有符合的记录！</h2>
     </el-col>
   </el-row>
 </template>

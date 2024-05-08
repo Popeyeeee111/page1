@@ -23,6 +23,20 @@ professorStore.$subscribe((mutation, state)=>{
   function find(param){
     const tb_head = state.professorFruit.header
     const tb_body = state.professorFruit.body
+
+    // 不指定查询参数时
+    if(!param){
+      tb_body.forEach(element => {
+        const obj = {}
+        element.forEach((attr, index) => {
+          obj[tb_head[index]] = attr
+        })
+        satisfiedFruits.value.push(obj)
+      })
+      return
+    }
+
+
     // 检索摘要、文章标题、作者
     const args = [tb_head.indexOf('abstract'), tb_head.indexOf('fruitName'), tb_head.indexOf('authorNames')]
     tb_body.forEach(element => {
@@ -60,9 +74,9 @@ function sqlLike(input, pattern){
       </router-link>
     </el-col>
   </el-row>
-  <el-row style="overflow-y: scroll" class="fruit-item">
+  <el-row class="fruit-item">
     <el-col :span="24">
-      <div style="margin: 20px">
+      <div style="margin: 2px">
         <index-professor-fruit v-for="fruit in satisfiedFruits" :title="fruit.fruitName" :author="fruit.authorNames"
                                :link="fruit.fruitOutLink" :publisher="fruit.fruitBaseIn" :key="fruit.id" :id="fruit.id"/>
       </div>

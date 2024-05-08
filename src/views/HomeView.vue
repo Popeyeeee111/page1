@@ -6,11 +6,12 @@
           <img src="/static/school.jpg" alt="图标" style="width: 200px; height: 50px">
         </router-link>
       </el-col>
+      <el-col :span="8"/>
       <el-col :span="8">
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
           <el-menu-item index="1" @click.native="$router.push('/')">首页</el-menu-item>
-          <el-menu-item index="2">学者</el-menu-item>
-          <el-menu-item index="3">成果</el-menu-item>
+          <el-menu-item index="2" @click.native="$router.push('/professor')">学者</el-menu-item>
+          <el-menu-item index="3" @click.native="$router.push('/fruitQ')">成果</el-menu-item>
         </el-menu>
       </el-col>
     </el-row>
@@ -30,14 +31,14 @@
         </div>
       </div>
     </el-container>
-    <el-row style="margin-top: 20px">
-      <el-col :span="12">
-        <el-statistic title="成果" :value="progress"/>
-      </el-col>
-      <el-col :span="12">
-        <el-statistic title="研究" :value="analyze"/>
-      </el-col>
-    </el-row>
+<!--    <el-row style="margin-top: 20px">-->
+<!--      <el-col :span="12">-->
+<!--        <el-statistic title="成果" :value="progress"/>-->
+<!--      </el-col>-->
+<!--      <el-col :span="12">-->
+<!--        <el-statistic title="研究" :value="analyze"/>-->
+<!--      </el-col>-->
+<!--    </el-row>-->
     <el-row>
       <el-container
           style="background-color: #d74764; width: 100%; height: 350px; margin-right: 30px; margin-left: 30px; margin-top: 20px; border-radius: 15px">
@@ -69,7 +70,36 @@
           </el-col>
         </el-row>
       </el-container>
+
+      <el-container style="background-color: white; width: 100%; margin-right: 30px; margin-left: 30px; margin-top: 15px; border-radius: 15px">
+        <el-header>
+          <el-row>
+            <el-col :span="4" class="text-normal-align">
+              <p style="margin-right: auto; font-weight: bold; color: black; font-size: 1.5rem; margin-left: 10px;">友情链接</p>
+            </el-col>
+          </el-row>
+        </el-header>
+        <el-row>
+          <el-col :span="4" class="text-normal-align">
+            <el-link href="https://kf.shutcm.edu.cn/">
+              <el-image src="/static/link-hospital.png" class="link-image"/>
+            </el-link>
+          </el-col>
+          <el-col :span="4" class="text-normal-align">
+            <el-link href="https://journals.lww.com/bnam/pages/currenttoc.aspx">
+              <el-image src="/static/link-journalism.png" class="link-image"/>
+            </el-link>
+          </el-col>
+        </el-row>
+      </el-container>
+
+
+
     </el-row>
+
+
+
+
   </div>
 </template>
 
@@ -163,13 +193,13 @@ const activeIndex = ref('1')
 const input1 = ref('')
 const source = ref(0)
 const source1 = ref(0)
-const progress = useTransition(source, {
-  duration: 1000,
-})
-source.value = 1200
-const analyze = useTransition(source1, {
-  duration: 1000,
-})
+// const progress = useTransition(source, {
+//   duration: 1000,
+// })
+// source.value = 1200
+// const analyze = useTransition(source1, {
+//   duration: 1000,
+// })
 source1.value = 1200
 const value = ref('')
 const options = [
@@ -210,5 +240,13 @@ const options = [
 }
 :deep(.el-button){
   border-radius: 0 !important;
+}
+.index-footer{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.link-image{
+  border-radius: .5rem;
+  height: 4rem;
 }
 </style>

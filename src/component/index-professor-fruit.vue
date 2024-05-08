@@ -22,7 +22,7 @@ const props = defineProps({
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <div style="display: flex; align-items: center;">
           <el-icon size="110px"><Document /></el-icon>
-          <div style="display: flex; flex-direction: column; align-items: flex-start; width: 1000px;">
+          <div style="display: flex; flex-direction: column; align-items: flex-start; width: inherit;">
             <el-link :underline="false" style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;" :href="props.link">{{props.title}}</el-link>
             <p style="margin-top: 10px;margin-left: 37px;">{{props.author}}</p>
             <p style="margin-bottom: 10px;margin-left: 37px; font-weight: lighter; color: darkgray;">{{props.publisher}}</p>

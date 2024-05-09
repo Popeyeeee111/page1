@@ -17,15 +17,16 @@ const props = defineProps({
 <template>
   <router-link :to="{path:'/personal',query: {id: props.id}}">
     <el-card style="border-radius: 20px">
-      <el-avatar
-          :src="props.avatar" style="width: 100px; height: 100px"
-      />
-      <p style="font-weight: bold">{{props.name}}</p>
-      <p>{{props.introduction}}</p>
+      <el-avatar :src="props.avatar" style="width: 100px; height: 100px"/>
+      <p style="font-weight: bold" class="professor-introduction">{{props.name}}</p>
+      <p class="professor-introduction">{{props.introduction}}</p>
     </el-card>
   </router-link>
 </template>
 
 <style scoped lang="scss">
-
+.professor-introduction{
+  font-size: 1.2rem;
+  font-family: mono-courier-new, alibaba-inclusive;
+}
 </style>

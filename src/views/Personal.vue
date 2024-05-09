@@ -28,22 +28,22 @@
             <span class="personal-tabs-header-text">主页</span>
           </template>
           <!--数据框-->
-          <div class="container">
-            <div class="row" style="margin-left: 30px;margin-right: 30px">
-              <div class="item">项目</div>
-              <div class="item">成果</div>
-              <div class="item">阅读</div>
-              <div class="item">下载</div>
-              <div class="item">被引</div>
-            </div>
-            <div class="row" style="text-indent: 12px;margin-left:30px;margin-right: 30px">
-              <div class="item">2</div>
-              <div class="item" style="text-indent: 30px">987</div>
-              <div class="item " style="text-indent: 20px">755</div>
-              <div class="item" style="text-indent: 20px">14</div>
-              <div class="item" style="">41905</div>
-            </div>
-          </div>
+<!--          <div class="container">-->
+<!--            <div class="row" style="margin-left: 30px;margin-right: 30px">-->
+<!--              <div class="item">项目</div>-->
+<!--              <div class="item">成果</div>-->
+<!--              <div class="item">阅读</div>-->
+<!--              <div class="item">下载</div>-->
+<!--              <div class="item">被引</div>-->
+<!--            </div>-->
+<!--            <div class="row" style="text-indent: 12px;margin-left:30px;margin-right: 30px">-->
+<!--              <div class="item">2</div>-->
+<!--              <div class="item" style="text-indent: 30px">987</div>-->
+<!--              <div class="item " style="text-indent: 20px">755</div>-->
+<!--              <div class="item" style="text-indent: 20px">14</div>-->
+<!--              <div class="item" style="">41905</div>-->
+<!--            </div>-->
+<!--          </div>-->
 
           <!--  个人简介-->
           <personal-introduction-separator menu-name="个人简介">
@@ -53,7 +53,8 @@
           <!--关键词-->
           <personal-introduction-separator menu-name="关键词">
             <div style="display: flex">
-              <el-tag v-for="tag in professorBasicInfo.keyword" :key="tag" :disable-transitions="false" @close="handleClose">
+              <el-tag v-for="tag in professorBasicInfo.keyword" style="margin-left: 5px; margin-right: 5px;"
+                      :key="tag" :disable-transitions="false" @close="handleClose">
                 {{ tag }}
               </el-tag>
             </div>
@@ -61,25 +62,21 @@
 
           <!--邮箱-->
           <personal-introduction-separator menu-name="邮箱">
-            <div style="background-color: azure;width: 200px">
-              <p>{{professorBasicInfo.email}}</p>
-            </div>
+            <p>{{professorBasicInfo.email}}</p>
           </personal-introduction-separator>
 
           <!--电话-->
           <personal-introduction-separator menu-name="电话">
-            <div style="background-color: azure;width: 200px">
-              <p>{{professorBasicInfo.phone}}</p>
-            </div>
+            <p>{{professorBasicInfo.phone}}</p>
           </personal-introduction-separator>
 
           <!--工作经历-->
           <personal-introduction-separator menu-name="工作经历">
             <div style="background-color: azure">
               <el-table :data="professorBasicInfo.resume">
-                <el-table-column prop="address" label="工作单位" align="center"/>
-                <el-table-column prop="author" label="职称" align="center"/>
-                <el-table-column prop="date" label="日期" align="center"/>
+                <el-table-column prop="address" label="工作单位"/>
+                <el-table-column prop="author" label="职称"/>
+                <el-table-column prop="date" label="日期"/>
               </el-table>
             </div>
           </personal-introduction-separator>
@@ -115,9 +112,9 @@
 
 
             <div style="width: 100%">
-              <div style="display: flex">
-                <p style="text-indent: 5px">H指数:113  成果:123</p>
-              </div>
+<!--              <div style="display: flex">-->
+<!--                <p style="text-indent: 5px">H指数:113  成果:123</p>-->
+<!--              </div>-->
               <personal-professor-fruit v-for="fruit in professorFruit" :key="fruit.id" :publisher="fruit.fruitBaseIn"
                                         :link="fruit.fruitOutLink" :author="fruit.authorNames" :id="fruit.id"
                                         :title="fruit.fruitName"/>

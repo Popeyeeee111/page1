@@ -7,7 +7,7 @@
 <script setup>
 import {useRoute} from "vue-router";
 import {useProfessorStore} from "@/store";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import IndexProfessorFruit from "@/component/index-professor-fruit.vue";
 
 const route = useRoute()
@@ -64,6 +64,22 @@ function sqlLike(input, pattern){
   // 返回匹配结果
   return regex.test(input);
 }
+
+const pageNum = ref(1)
+const pageSize = 10;
+
+
+const fruitOnDisplay = computed(()=>{
+  let temp = []
+  const low = (pageNum.value-1)*pageSize;
+  const high = (pageNum.value)*pageSize - 1;
+  for (let i = low; i < satisfiedFruits.value.length; i++) {
+    if(i>high) break
+    temp.push(satisfiedFruits.value[i])
+  }
+  return temp
+})
+
 </script>
 
 <template>
@@ -74,17 +90,31 @@ function sqlLike(input, pattern){
       </router-link>
     </el-col>
   </el-row>
+  <el-row>
+    <el-col :span="8" v-if="satisfiedFruits.length===0">
+      <h2>当前指定的搜素条件没有符合的记录！</h2>
+    </el-col>
+    <el-col v-if="satisfiedFruits.length!==0&&fruitQueryParams" :span="8">
+      <h2>当前指定的搜索条件下有{{satisfiedFruits.length}}条成果</h2>
+    </el-col>
+    <el-col v-if="satisfiedFruits.length!==0&&!fruitQueryParams" :span="8">
+      <h2>当前共有{{satisfiedFruits.length}}条成果</h2>
+    </el-col>
+  </el-row>
   <el-row class="fruit-item">
-    <el-col :span="24">
+    <el-col :span="3"/>
+    <el-col :span="18">
       <div style="margin: 2px">
-        <index-professor-fruit v-for="fruit in satisfiedFruits" :title="fruit.fruitName" :author="fruit.authorNames"
+        <index-professor-fruit v-for="fruit in fruitOnDisplay" :title="fruit.fruitName" :author="fruit.authorNames"
                                :link="fruit.fruitOutLink" :publisher="fruit.fruitBaseIn" :key="fruit.id" :id="fruit.id"/>
       </div>
     </el-col>
+    <el-col :span="3"/>
   </el-row>
-  <el-row v-show="satisfiedFruits.length===0">
-    <el-col :span="8">
-      <h2>当前指定的搜素条件没有符合的记录！</h2>
+  <el-row>
+    <el-col :span="21" style="display: flex; justify-content: flex-end">
+      <el-pagination :page-size="pageSize" hide-on-single-page v-model:current-page="pageNum"
+                     :pager-count="6" layout="prev, pager, next" :total="satisfiedFruits.length" />
     </el-col>
   </el-row>
 </template>

@@ -21,11 +21,11 @@ const props = defineProps({
     <el-card class="index-professor-fruit" shadow="hover" >
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <div style="display: flex; align-items: center;">
-          <el-icon size="110px"><Document /></el-icon>
+<!--          <el-icon size="110px"><Document /></el-icon>-->
           <div style="display: flex; flex-direction: column; align-items: flex-start; width: inherit;">
-            <el-link :underline="false" style="margin-top: -10px;margin-left: 37px; font-size: 16px; font-weight: bold;" :href="props.link">{{props.title}}</el-link>
-            <p style="margin-top: 10px;margin-left: 37px;">{{props.author}}</p>
-            <p style="margin-bottom: 10px;margin-left: 37px; font-weight: lighter; color: darkgray;">{{props.publisher}}</p>
+            <el-link :underline="false"  :href="props.link" class="fruit-title">{{props.title}}</el-link>
+            <span class="fruit-tag">{{props.author}}</span>
+            <span style="color: darkgray" class="fruit-tag">{{props.publisher}}</span>
           </div>
         </div>
       </div>
@@ -34,6 +34,23 @@ const props = defineProps({
 </template>
 
 <style scoped lang="scss">
+.fruit-title{
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: mono-courier-new, alibaba-inclusive;
+}
+
+.fruit-tag{
+  display: block;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  font-size: 1.2rem;
+  font-family: mono-courier-new, alibaba-inclusive;
+}
+
+
 .index-professor-fruit{
   border-radius: 20px;
   margin: 10px 0;

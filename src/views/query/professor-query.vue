@@ -7,8 +7,9 @@
 <script setup>
 import {useRoute} from "vue-router";
 import {useProfessorStore} from "@/store";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import IndexProfessorAvatar from "@/component/index-professor-avatar.vue";
+import ProfessorSearchResult from "@/component/professor-search-result.vue";
 
 const route = useRoute()
 // 查询参数为成果名
@@ -62,17 +63,25 @@ function sqlLike(input, pattern){
   // 返回匹配结果
   return regex.test(input);
 }
+
+const pageNum = ref(1)
+const pageSize = 10;
+
+
+const fruitOnDisplay = computed(()=>{
+  let temp = []
+  const low = (pageNum.value-1)*pageSize;
+  const high = (pageNum.value)*pageSize - 1;
+  for (let i = low; i < satisfiedFruits.value.length; i++) {
+    if(i>high) break
+    temp.push(satisfiedFruits.value[i])
+  }
+  return temp
+})
+
 </script>
 
 <template>
-  <el-row>
-    <el-col :span="8"  v-if="satisfiedFruits.length===0">
-      <h2>当前指定的搜素条件没有符合的记录！</h2>
-    </el-col>
-    <el-col v-else :span="8">
-      <h2>根据您选择的筛选条件，共有{{satisfiedFruits.length}}条记录</h2>
-    </el-col>
-  </el-row>
   <el-row>
     <el-col :span="8">
       <router-link to="/">
@@ -80,12 +89,31 @@ function sqlLike(input, pattern){
       </router-link>
     </el-col>
   </el-row>
+  <el-row>
+    <el-col :span="8" v-if="satisfiedFruits.length===0">
+      <h2>当前指定的搜素条件没有符合的记录！</h2>
+    </el-col>
+    <el-col v-if="satisfiedFruits.length!==0&&fruitQueryParams" :span="8">
+      <h2>当前指定的搜索条件下有{{satisfiedFruits.length}}位学者</h2>
+    </el-col>
+    <el-col v-if="satisfiedFruits.length!==0&&!fruitQueryParams" :span="8">
+      <h2>当前共有{{satisfiedFruits.length}}位学者</h2>
+    </el-col>
+  </el-row>
   <el-row class="fruit-item">
-    <el-col :span="24">
+    <el-col :span="3"/>
+    <el-col :span="18">
       <div style="margin: 20px">
-        <index-professor-avatar v-for="professor in satisfiedFruits" :introduction="professor.positionRemark" :id="professor.id"
-                                :avatar="professor.avatar" :name="professor.name"/>
+        <professor-search-result v-for="professor in fruitOnDisplay" :introduction="professor.positionRemark" :id="professor.id"
+                                :avatar="professor.avatar" :name="professor.name" :detail="professor.introduction"/>
       </div>
+    </el-col>
+    <el-col :span="3"/>
+  </el-row>
+  <el-row>
+    <el-col :span="21" style="display: flex; justify-content: flex-end">
+      <el-pagination :page-size="pageSize" hide-on-single-page v-model:current-page="pageNum"
+                     :pager-count="6" layout="prev, pager, next" :total="satisfiedFruits.length" />
     </el-col>
   </el-row>
 </template>

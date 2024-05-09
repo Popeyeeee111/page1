@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-bottom: 2rem;">
     <el-row>
       <el-col :span="8">
         <router-link to="/">
@@ -41,11 +41,12 @@
 <!--    </el-row>-->
     <el-row>
       <el-container
-          style="background-color: #d74764; width: 100%; height: 350px; margin-right: 30px; margin-left: 30px; margin-top: 20px; border-radius: 15px">
+          style="background-color: #d74764; width: 100%; height: auto; margin-right: 30px; margin-left: 30px; margin-top: 20px; border-radius: 15px">
         <el-header style="display: flex; justify-content: space-between;">
           <p style="margin-right: auto; margin-left: 10px; font-weight: bold; color: white; font-size: 1.5rem">主要学者</p>
-          <p style="margin-left: auto; margin-right: 10px; cursor: pointer; font-weight: bold; color: white; font-size: 1.5rem" >
-            MORE</p>
+          <router-link to="/professor">
+            <p style="margin-left: auto; margin-right: 10px; cursor: pointer; font-weight: bold; color: white; font-size: 1.5rem" >MORE</p>
+          </router-link>
         </el-header>
         <el-row :gutter="20" style="margin: 15px">
           <!--          只允许有4个，或者做成滚动-->
@@ -58,8 +59,9 @@
       <el-container style="background-color: #2a86be; width: 100%; height: 900px; margin-right: 30px; margin-left: 30px; margin-top: 15px; border-radius: 15px">
         <el-header style="display: flex; justify-content: space-between;">
           <p style="margin-right: auto; margin-left: 10px; font-weight: bold; color: white; font-size: 1.5rem">最新成果</p>
-          <p style="margin-left: auto; margin-right: 10px; cursor: pointer; font-weight: bold; color: white; font-size: 1.5rem" >
-            MORE</p>
+          <router-link to="/fruitQ">
+            <p style="margin-left: auto; margin-right: 10px; cursor: pointer; font-weight: bold; color: white; font-size: 1.5rem" >MORE</p>
+          </router-link>
         </el-header>
         <el-row style="overflow-y: scroll" class="fruit-item">
           <el-col :span="24">
@@ -92,14 +94,7 @@
           </el-col>
         </el-row>
       </el-container>
-
-
-
     </el-row>
-
-
-
-
   </div>
 </template>
 

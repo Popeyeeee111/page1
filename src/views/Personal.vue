@@ -91,22 +91,28 @@
           <div style="display: flex; margin-top: -12px">
             <el-col :span="6" >
 
-              <el-menu default-active="2" @close="handleClose">
-                <el-sub-menu index="1">
+
+              <el-menu default-active="all-year" @close="handleClose" @select="handleSelect">
+                <el-sub-menu index="year">
                   <template #title>
                     <span>年份</span>
                   </template>
-                  <el-menu-item index="1-1">item one</el-menu-item>
-                  <el-menu-item index="1-2">item two</el-menu-item>
-                  <el-menu-item index="1-3">item three</el-menu-item>
+                  <el-menu-item index="all-year">全部年份</el-menu-item>
+                  <el-menu-item v-for="year in inclusiveYearList" :index="year">{{year}}年</el-menu-item>
                 </el-sub-menu>
-                <el-menu-item index="2">
+              </el-menu>
+
+              <el-menu default-active="all-type" @close="handleClose" @select="handleSelect">
+                <el-sub-menu index="type">
                   <template #title>
                     <span>成果类型</span>
                   </template>
-                </el-menu-item>
-
+                  <el-menu-item index="all-type">全部类型</el-menu-item>
+                  <el-menu-item v-for="t in inclusiveTypeList" :index="t">{{t}}</el-menu-item>
+                </el-sub-menu>
               </el-menu>
+
+
             </el-col>
 
 
@@ -115,7 +121,7 @@
 <!--              <div style="display: flex">-->
 <!--                <p style="text-indent: 5px">H指数:113  成果:123</p>-->
 <!--              </div>-->
-              <personal-professor-fruit v-for="fruit in professorFruit" :key="fruit.id" :publisher="fruit.fruitBaseIn"
+              <personal-professor-fruit v-for="fruit in fruitToDisplay" :key="fruit.id" :publisher="fruit.fruitBaseIn"
                                         :link="fruit.fruitOutLink" :author="fruit.authorNames" :id="fruit.id"
                                         :title="fruit.fruitName"/>
             </div>
@@ -125,53 +131,12 @@
     </el-col>
     <el-col :span="2"/>
   </el-row>
-
-
+  <div class="bottom-view"/>
 </template>
-
-<style scoped lang="scss">
-.demo-type {
-  display: flex;
-}
-
-.demo-type > div {
-  flex: 1;
-  text-align: center;
-}
-
-.demo-type > div:not(:last-child) {
-  border-right: 1px solid var(--el-border-color);
-}
-
-//数据框
-.container {
-  display: flex;
-  flex-direction: column;
-  width: 90%;
-  margin: 35px auto;
-  background-color: #3A3C435A;
-}
-
-.row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* 垂直居中对齐 */
-}
-
-.item {
-  padding: 10px;
-  border: none;
-  line-height: 1; /* 设置行高为1，可根据需要调整 */
-  text-align: center; /* 水平居中对齐 */
-}
-.personal-tabs-header-text{
-  font-size: 1rem;
-}
-</style>
 
 
 <script setup>
-import {ref} from 'vue'
+import {computed, reactive, ref} from 'vue'
 import {useRoute} from "vue-router";
 const route = useRoute()
 const professorId = route.query.id
@@ -258,7 +223,7 @@ professorStore.$subscribe(
 )
 
 
-const activeName = ref('second');
+const activeName = ref('first');
 
 const handleClick1 = (tab, event) => {
   console.log(tab, event);
@@ -268,7 +233,91 @@ const handleClose = () => {
   return false
 }
 
+// 控制当前
+const filterConditionSelected = reactive({
+  year: 'all-year',
+  type: 'all-type'
+})
+
+const fruitToDisplay = computed(()=>{
+  console.log(0)
+  const display = []
+  // 先过滤年份
+  professorFruit.value.forEach((element, index) => {
+    const selType = filterConditionSelected.type
+    const selTypeB = selType==='all-type'
+    const selYear = filterConditionSelected.year
+    const selYearB = selYear==='all-year'
+    const green = selTypeB&&selYearB
+    const eleYear = element.year
+    const eleType = element.fruitType
+    if(green||(selTypeB&&selYear==eleYear)||(selYearB&&selType==eleType)||(selType==eleType&&selYear==eleYear)){
+      display.push(element)
+    }
+  })
+  // console.log(display)
+  return display
+})
+
+const handleSelect = (key, keyPath)=>{
+  filterConditionSelected[keyPath[0]] = key
+}
+// 这个人发表的文章的年份
+const inclusiveYearList = computed(()=>{
+  const obj = {}
+  professorFruit.value.map(fruit=>{
+    obj[fruit.year] = 'r'
+  })
+  return Object.keys(obj)
+})
+const inclusiveTypeList = computed(()=>{
+  const obj = {}
+  professorFruit.value.map(fruit=>{
+    obj[fruit.fruitType] = 'r'
+  })
+  return Object.keys(obj)
+})
 
 </script>
 
+
+<style scoped lang="scss">
+.demo-type {
+  display: flex;
+}
+
+.demo-type > div {
+  flex: 1;
+  text-align: center;
+}
+
+.demo-type > div:not(:last-child) {
+  border-right: 1px solid var(--el-border-color);
+}
+
+//数据框
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 35px auto;
+  background-color: #3A3C435A;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* 垂直居中对齐 */
+}
+
+.item {
+  padding: 10px;
+  border: none;
+  line-height: 1; /* 设置行高为1，可根据需要调整 */
+  text-align: center; /* 水平居中对齐 */
+}
+.personal-tabs-header-text{
+  font-size: 1rem;
+}
+</style>
 

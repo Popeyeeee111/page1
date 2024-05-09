@@ -101,6 +101,7 @@ professorStore.$subscribe((mutation, state)=>{
       </el-tabs>
     </div>
   </div>
+  <div class="bottom-view"/>
 </template>
 
 

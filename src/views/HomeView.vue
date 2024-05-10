@@ -17,17 +17,19 @@
     </el-row>
     <el-container class="background-image-container">
       <div
-          style="margin: 10px; backdrop-filter: blur(2px); width: 600px; height: 80px; display: flex; justify-content:center">
+          style="margin: 10px; backdrop-filter: blur(2px); width: 60%; height: 80px; display: flex; justify-content:center">
         <div style="display: flex; justify-content: center; align-items: center;">
-          <el-select v-model="value" placeholder="请选择" size="large" style="width: 100px">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"/>
-          </el-select>
-          <el-input v-model="input1" style="width: 240px; height: 40px" placeholder="查找内容"/>
-          <el-button type="primary" style="height: 40px" @click="handleQuery">
-            <el-icon style="margin: 5px">
-              <search/>
-            </el-icon>
-          </el-button>
+          <el-row>
+            <el-select v-model="value" placeholder="请选择" size="large" style="width: 120px">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"/>
+            </el-select>
+            <el-input v-model="input1" style="width: 480px" placeholder="查找内容"/>
+            <el-button type="primary" style="height: 40px" @click="handleQuery">
+              <el-icon style="margin: 5px">
+                <search/>
+              </el-icon>
+            </el-button>
+          </el-row>
         </div>
       </div>
     </el-container>
@@ -48,9 +50,9 @@
             <p style="margin-left: auto; margin-right: 10px; cursor: pointer; font-weight: bold; color: white; font-size: 1.5rem" >MORE</p>
           </router-link>
         </el-header>
-        <el-row :gutter="20" style="margin: 15px">
+        <el-row :gutter="20" style="margin: 15px; display: flex; justify-content: space-around">
           <!--          只允许有4个，或者做成滚动-->
-          <el-col :span="6" v-for="professor in toDisplayProfessor">
+          <el-col :span="4" v-for="professor in toDisplayProfessor">
             <index-professor-avatar :introduction="professor.positionRemark" :id="professor.id"
                                     :avatar="professor.avatar" :name="professor.name"/>
           </el-col>
@@ -72,6 +74,8 @@
           </el-col>
         </el-row>
       </el-container>
+
+      <el-container style="background-color: rgba(0,0,0,.5); width: 100%; margin-right: 30px; margin-left: 30px; margin-top: 20px; height: 2px"/>
 
       <el-container style="background-color: white; width: 100%; margin-right: 30px; margin-left: 30px; margin-top: 15px; border-radius: 15px">
         <el-header>

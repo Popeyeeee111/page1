@@ -91,13 +91,14 @@ const fruitOnDisplay = computed(()=>{
     </el-col>
   </el-row>
   <el-row>
-    <el-col :span="8" v-if="satisfiedFruits.length===0">
+    <el-col :span="3"/>
+    <el-col :span="8" v-if="satisfiedFruits.length===0" class="text-normal-align">
       <h2>当前指定的搜素条件没有符合的记录！</h2>
     </el-col>
-    <el-col v-if="satisfiedFruits.length!==0&&fruitQueryParams" :span="8">
+    <el-col v-if="satisfiedFruits.length!==0&&fruitQueryParams" :span="8" class="text-normal-align">
       <h2>当前指定的搜索条件下有{{satisfiedFruits.length}}条成果</h2>
     </el-col>
-    <el-col v-if="satisfiedFruits.length!==0&&!fruitQueryParams" :span="8">
+    <el-col v-if="satisfiedFruits.length!==0&&!fruitQueryParams" :span="8" class="text-normal-align">
       <h2>当前共有{{satisfiedFruits.length}}条成果</h2>
     </el-col>
   </el-row>

@@ -37,7 +37,7 @@ const props = defineProps({
 .fruit-title{
   margin-top: .5rem;
   margin-bottom: .5rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
   font-family: mono-courier-new, alibaba-inclusive;
 }
@@ -46,7 +46,7 @@ const props = defineProps({
   display: block;
   margin-top: .5rem;
   margin-bottom: .5rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-family: mono-courier-new, alibaba-inclusive;
 }
 

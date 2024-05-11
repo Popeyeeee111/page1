@@ -34,6 +34,9 @@ const props = defineProps({
 </template>
 
 <style scoped lang="scss">
+*{
+  text-align: left;
+}
 .fruit-title{
   margin-top: .5rem;
   margin-bottom: .5rem;

@@ -8,7 +8,6 @@
 import {useRoute} from "vue-router";
 import {useProfessorStore} from "@/store";
 import {computed, ref} from "vue";
-import IndexProfessorAvatar from "@/component/index-professor-avatar.vue";
 import ProfessorSearchResult from "@/component/professor-search-result.vue";
 
 const route = useRoute()
@@ -72,6 +71,8 @@ const fruitOnDisplay = computed(()=>{
   let temp = []
   const low = (pageNum.value-1)*pageSize;
   const high = (pageNum.value)*pageSize - 1;
+  // console.log('satisfiedFruits', satisfiedFruits.value)
+  // console.log('satisfiedFruits.length', satisfiedFruits.value.length)
   for (let i = low; i < satisfiedFruits.value.length; i++) {
     if(i>high) break
     temp.push(satisfiedFruits.value[i])
@@ -117,6 +118,7 @@ const fruitOnDisplay = computed(()=>{
                      :pager-count="6" layout="prev, pager, next" :total="satisfiedFruits.length" />
     </el-col>
   </el-row>
+  <div class="bottom-view"/>
 </template>
 
 <style scoped lang="scss">

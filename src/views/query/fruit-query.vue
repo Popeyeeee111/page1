@@ -118,6 +118,7 @@ const fruitOnDisplay = computed(()=>{
                      :pager-count="6" layout="prev, pager, next" :total="satisfiedFruits.length" />
     </el-col>
   </el-row>
+  <div class="bottom-view"/>
 </template>
 
 <style scoped lang="scss">

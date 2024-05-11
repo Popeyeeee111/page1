@@ -206,7 +206,7 @@ professorStore.$subscribe(
       Object.keys(obj).length===0?console.log("非法ID输入！"):professorBasicInfo.value=obj
       // 特殊处理关键词和个人简介
       if(Object.keys(obj).length!==0){
-        professorBasicInfo.value.keyword = obj.keyword.replace('；', ';').split(';')
+        professorBasicInfo.value.keyword = obj.keyword.replace(" ", '').replace('；', ';').split(';')
         professorBasicInfo.value.resume = obj.resume.split("\r\n").map(element => {
           const row = element.replace('：', ':').split(':')
           return {
@@ -226,7 +226,7 @@ professorStore.$subscribe(
 const activeName = ref('first');
 
 const handleClick1 = (tab, event) => {
-  console.log(tab, event);
+  // console.log(tab, event);
 };
 
 const handleClose = () => {
@@ -240,7 +240,7 @@ const filterConditionSelected = reactive({
 })
 
 const fruitToDisplay = computed(()=>{
-  console.log(0)
+  // console.log(0)
   const display = []
   // 先过滤年份
   professorFruit.value.forEach((element, index) => {

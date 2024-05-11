@@ -41,7 +41,7 @@ professorStore.$subscribe((mutation, state)=>{
 
   const searched = getFruitByFruitId(fruitId);
   Object.keys(searched).length===0?console.log("非法论文输入！"):fruitBasicInfo.value=searched
-  console.log(fruitBasicInfo.value)
+  // console.log(fruitBasicInfo.value)
 }, {detached: false})
 
 

@@ -10,8 +10,8 @@ import {useProfessorStore} from "@/store";
 const professorStore = useProfessorStore();
 import {storeToRefs} from "pinia";
 const {professor, professorFruit} = storeToRefs(professorStore)
-console.log(professorFruit.value)
-console.log(professor.value)
+// console.log(professorFruit.value)
+// console.log(professor.value)
 
 </script>
 

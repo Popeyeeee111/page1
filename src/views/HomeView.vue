@@ -52,7 +52,7 @@
         </el-header>
         <el-row :gutter="20" style="margin: 15px; display: flex; justify-content: space-around">
           <!--          只允许有4个，或者做成滚动-->
-          <el-col :span="4" v-for="professor in toDisplayProfessor">
+          <el-col :span="displayProfessorsLength" v-for="professor in toDisplayProfessor">
             <index-professor-avatar :introduction="professor.positionRemark" :id="professor.id"
                                     :avatar="professor.avatar" :name="professor.name"/>
           </el-col>
@@ -103,7 +103,7 @@
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import {computed, ref} from 'vue';
 import {useTransition} from '@vueuse/core'
 import IndexProfessorAvatar from "@/component/index-professor-avatar.vue";
 import router from '@/router'
@@ -118,6 +118,9 @@ const professorStore = useProfessorStore();
 const {setProfessorAndProfessorStore} = professorStore
 // 需要展示的学者信息
 const toDisplayProfessor = ref([])
+const displayProfessorsLength = computed(()=>{
+  return Math.floor(24 / toDisplayProfessor.value.length)
+})
 const toDisplayFruit = ref([])
 
 
